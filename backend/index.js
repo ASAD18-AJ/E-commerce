@@ -1,4 +1,3 @@
-const port = 4000;
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,14 +6,17 @@ const multer = require("multer");
 const path = require("path")
 const cors = require("cors");
 const { error } = require("console");
-
+require('dotenv').config();
 
 app.use(express.json());
 app.use(cors());
 
+const port = process.env.PORT || 4000;
+const dbURI = process.env.MONGODB_URI;
+
 //Database Connection with Mongodb
 
-mongoose.connect("mongodb+srv://asadjahangir:MongoDB123@cluster0.fqwkiye.mongodb.net/ecommerce").then(()=>console.log("Mongodb connected"))
+mongoose.connect(dbURI).then(()=>console.log("Mongodb connected"))
 .catch((err)=> console.log('Mongo err',err))
 
 
